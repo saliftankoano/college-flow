@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import logo from "./assets/bxp.png";
+import React, { useEffect, useState } from "react";
+import student1 from "./assets/student1.png";
+import student2 from "./assets/student2.png";
+import student3 from "./assets/student3.png";
+import student4 from "./assets/student4.png";
+import Navigation from "./components/Navigation";
+const studentImgs = [student1, student2, student3, student4];
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {}, [index]);
+
+  function changeBackground() {
+    setIndex((prevIndex) => (prevIndex + 1) % studentImgs.length);
+  }
+  useEffect(() => {
+    const intervalId = setInterval(changeBackground, 3200);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="container">
+      <Navigation />
+      <div className="backgrounds flex h-screen w-screen ">
+        {studentImgs.map((studentImg, i) => (
+          <img
+            key={i}
+            className={
+              i == index ? `background-student display` : `background-student`
+            }
+            src={studentImg}
+            alt="student image"
+          />
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
-
-export default App
