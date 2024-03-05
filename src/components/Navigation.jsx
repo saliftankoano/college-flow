@@ -3,7 +3,7 @@ import bxpLogo from "../assets/6.png";
 
 export default function Navigation() {
   return (
-    <nav className="absolute w-screen bg-[#66000000] border-gray-200 dark:bg-gray-900">
+    <nav className="block w-screen bg-[#66000000] border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a
           href="https://flowbite.com/"

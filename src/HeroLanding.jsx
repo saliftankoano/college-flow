@@ -1,13 +1,13 @@
-import logo from "./assets/bxp.png";
 import React, { useEffect, useState } from "react";
 import student1 from "./assets/student1.png";
 import student2 from "./assets/student2.png";
 import student3 from "./assets/student3.png";
 import student4 from "./assets/student4.png";
-import Navigation from "./components/Navigation";
+import LogoSlider from "./components/LogoSlider";
+
 const studentImgs = [student1, student2, student3, student4];
 
-export default function App() {
+export default function HeroLanding() {
   const [index, setIndex] = useState(0);
   useEffect(() => {}, [index]);
 
@@ -20,8 +20,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="container">
-      <Navigation />
+    <div className="block">
       <div className="backgrounds flex h-screen w-screen ">
         {studentImgs.map((studentImg, i) => (
           <img

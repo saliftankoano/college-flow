@@ -3,8 +3,19 @@
 @tailwind utilities;
 
 .backgrounds {
-  position: absolute;
   z-index: -5;
+}
+
+.set-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  place-items: center;
+}
+@layer components {
+  .overlap {
+    grid-area: 1 / 1;
+  }
 }
 
 .background-student {
