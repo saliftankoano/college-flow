@@ -3,7 +3,6 @@ import student1 from "./assets/student1.png";
 import student2 from "./assets/student2.png";
 import student3 from "./assets/student3.png";
 import student4 from "./assets/student4.png";
-import LogoSlider from "./components/LogoSlider";
 
 const studentImgs = [student1, student2, student3, student4];
 
@@ -20,7 +19,7 @@ export default function HeroLanding() {
   }, []);
 
   return (
-    <div className="block">
+    <div className="block z-0 w-screen">
       <div className="backgrounds flex h-screen w-screen ">
         {studentImgs.map((studentImg, i) => (
           <img

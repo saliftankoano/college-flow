@@ -6,15 +6,20 @@
   z-index: -5;
 }
 
-.set-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  place-items: center;
-}
 @layer components {
-  .overlap {
-    grid-area: 1 / 1;
+  .colleges {
+    width: 405px;
+    height: 95px;
+    padding: 5px 5px;
+    margin: 0 40px;
+  }
+  @keyframes slide {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-410%);
+    }
   }
 }
 
