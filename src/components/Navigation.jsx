@@ -3,28 +3,25 @@ import bxpLogo from "../assets/6.png";
 
 export default function Navigation() {
   return (
-    <nav className="z-10 absolute block w-screen bg-[#66000000] border-gray-200 dark:bg-gray-900">
+    <nav className="z-10 absolute block w-[100%] bg-[#66000000] border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a
-          href="https://flowbite.com/"
-          className="flex items-center space-x-3 rtl:space-x-reverse"
-        >
-          <img src={bxpLogo} className="h-8" alt="BXP" />
-          <span className="items-center justify-center text-2xl font-['Eczar'] font-semibold whitespace-nowrap dark:text-white">
-            BLOOMING XP
+        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src={bxpLogo} className="h-[8vh]" alt="BXP" />
+          <span className="text-black items-center justify-center text-2xl font-['Eczar'] font-semibold whitespace-nowrap ">
+            COLLEGE FLOW
           </span>
         </a>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <button
             type="button"
-            className="text-white bg-black hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="ease-in transition-all text-white bg-black hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
           >
-            Get started
+            Sign In
           </button>
           <button
             data-collapse-toggle="navbar-cta"
             type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
             aria-controls="navbar-cta"
             aria-expanded="false"
           >
@@ -54,7 +51,7 @@ export default function Navigation() {
             <li>
               <a
                 href="#"
-                className="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-white md:dark:text-blue-500"
+                className="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-white "
                 aria-current="page"
               >
                 Home

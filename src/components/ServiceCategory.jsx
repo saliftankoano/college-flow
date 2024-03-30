@@ -1,12 +1,19 @@
-import image from "../assets/categories/ai.png";
-export default function ServiceCategory() {
+export default function ServiceCategory(props) {
   return (
     <>
-      <div className="h-[345px] w-[245px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <a href="#">
-          <img className="rounded-t-lg h-full" src={image} alt="" />
-        </a>
-      </div>
+      <a href="#">
+        <div className="w-[260px] ps-3  cursor-pointer">
+          <img
+            className="w-[100%] h-[85%] rounded-2xl ease-in transition-all hover:translate-y-[-.7rem]"
+            src={props.link}
+            alt={props.categoryName}
+            loading="lazy"
+          />
+          <h3 className="uppercase text-white bg-black font-semibold text-center">
+            {props.categoryName}
+          </h3>
+        </div>
+      </a>
     </>
   );
 }

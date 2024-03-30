@@ -1,21 +1,15 @@
+import Footer from "./components/Footer";
 import LogoSlider from "./components/LogoSlider";
+import Services from "./components/Services";
 import Hero from "./Hero";
-import ServiceCategory from "./components/ServiceCategory";
 
 export default function Home() {
-  const categories = [
-    "AI Services",
-    "Digital Marketing",
-    "Graphics & Design",
-    "Programming & Tech",
-    "Video & Animation",
-    "Writing & Translation",
-  ];
   return (
-    <div className="w-screen">
-      <Hero className="" />
-      <LogoSlider className="relative" />
-      <ServiceCategory />
+    <div className="w-[100%] bg-[#000000]">
+      <Hero />
+      <LogoSlider />
+      <Services />
+      <Footer />
     </div>
   );
 }

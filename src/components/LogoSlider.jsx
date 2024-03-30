@@ -56,30 +56,46 @@ const colleges = [
 ];
 export default function LogoSlider() {
   return (
-    <div className="logos bg-[#b0b0b0] whitespace-nowrap overflow-hidden scroll-m-0 p-[1%]">
-      <article className="format lg:format-lg w-screen p-[1%]">
-        <h1 className="text-black text-center w-screen">
-          A talented pool from 25 CUNY Colleges
-        </h1>
-      </article>
-      <div className="inline-flex animate-[slide_120s_infinite_linear]">
-        {colleges.map((college, key) => (
-          <img
-            key={key}
-            className="colleges"
-            src={college}
-            alt="college logo"
-          />
-        ))}
-        {colleges.map((college, key) => (
-          <img
-            key={key}
-            className="colleges"
-            src={college}
-            alt="college logo"
-          />
-        ))}
+    <>
+      <div className="w-[100%] border-white bg-black whitespace-nowrap overflow-hidden scroll-m-0">
+        <article className="format lg:format-lg w-screen p-[1%]">
+          <h1 className="text-white text-center w-screen">
+            Talent from 25 CUNY Colleges
+          </h1>
+        </article>
+        <div className="inline-flex animate-[slide_120s_infinite_linear]">
+          {colleges.map((college, key) => (
+            <img
+              key={key}
+              className="colleges"
+              src={college}
+              alt="college logo"
+            />
+          ))}
+          {colleges.map((college, key) => (
+            <img
+              key={key}
+              className="colleges"
+              src={college}
+              alt="college logo"
+            />
+          ))}
+        </div>
+        {/* <div className="relative w-[100%] overflow-hidden leading-[0] rotate-[180deg]">
+          <svg
+            className="relative block h-[85px] w-[calc(100%+1.3px)]"
+            data-name="Layer 1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+              className="fill-[#000000]"
+            ></path>
+          </svg>
+        </div> */}
       </div>
-    </div>
+    </>
   );
 }
