@@ -57,10 +57,10 @@ const colleges = [
 export default function LogoSlider() {
   return (
     <>
-      <div className="w-[100%] border-white bg-black whitespace-nowrap overflow-hidden scroll-m-0">
-        <article className="format lg:format-lg w-screen p-[1%]">
+      <div className="w-[100%] border-white bg-black whitespace-nowrap overflow-hidden scroll-m-0 pt-4">
+        <article className="format lg:format-lg w-[100%] p-[1%]">
           <h1 className="text-white text-center w-screen">
-            Talent from 25 CUNY Colleges
+            Talent From 25 CUNY Colleges
           </h1>
         </article>
         <div className="inline-flex animate-[slide_120s_infinite_linear]">

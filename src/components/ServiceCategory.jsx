@@ -9,7 +9,7 @@ export default function ServiceCategory(props) {
             alt={props.categoryName}
             loading="lazy"
           />
-          <h3 className="uppercase text-white bg-black font-semibold text-center">
+          <h3 className="uppercase mt-3 text-white bg-black font-semibold text-center">
             {props.categoryName}
           </h3>
         </div>
