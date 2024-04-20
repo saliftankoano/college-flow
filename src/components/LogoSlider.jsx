@@ -57,9 +57,9 @@ const colleges = [
 export default function LogoSlider() {
   return (
     <>
-      <div className="w-[100%] border-white bg-black whitespace-nowrap overflow-hidden scroll-m-0 pt-4">
+      <div className="w-[100%] border-white bg-white whitespace-nowrap overflow-hidden scroll-m-0 pt-4">
         <article className="format lg:format-lg w-[100%] p-[1%]">
-          <h1 className="text-white text-center w-screen">
+          <h1 className="text-black text-center w-screen">
             Talent From 25 CUNY Colleges
           </h1>
         </article>

@@ -67,7 +67,6 @@ export default function Popular() {
         <h2 className="font-custom text-black font-medium text-4xl relative mt-[-4%] mb-[3%] ps-[10%]">
           Popular Services
         </h2>
-
         <Carousel />
       </div>
     </>

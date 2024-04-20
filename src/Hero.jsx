@@ -5,13 +5,14 @@ export default function Hero() {
     <>
       <section className="pt-[10%] bg-[#004439] w-full">
         <div className=" h-[88vh] grid w-full px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 bg-[#004439]">
+          {/* Man Big circle */}
           <svg
             width="801"
             height="686"
             viewBox="0 0 801 686"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="bigHeroCircle absolute top-[18%] right-[-.4%] z-0"
+            className="bigHeroCircle absolute top-[18%] right-[0%] z-0"
           >
             <path
               fillRule="evenodd"
@@ -57,13 +58,12 @@ export default function Hero() {
             <circle cx="6.5" cy="6.5" r="6.5" fill="#E9E920" />
           </svg>
           {/* Hero Man */}
-
           <img
             src={heroMan}
             alt="college black male student with a radiant smile"
-            className=" scale-[1] absolute top-[10%] right-[8%] z-10"
+            className=" scale-[1] absolute top-[10%] right-[7%] z-10"
           />
-
+          {/* CUNY circle */}
           <svg
             width="240"
             height="320"
@@ -80,6 +80,7 @@ export default function Hero() {
               fillOpacity="0.38"
             />
           </svg>
+          {/* Man Shoulder circle */}
           <svg
             width="320"
             height="320"

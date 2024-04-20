@@ -41,7 +41,7 @@ export default function Carousel() {
   return (
     <>
       <div className="wrapper relative w-[100%] bg-white ">
-        <div className="inline-flex h-[365px] justify-center items-center">
+        <div className="inline-flex h-[365px] justify-center items-center ">
           <div
             className="z-10 left-arrow relative left-[1.5%] flex items-center justify-center bg-white rounded-[50%] hover:cursor-pointer"
             onClick={moveLeft}
