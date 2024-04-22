@@ -1,199 +1,101 @@
 import { useState } from "react";
-import logo from "./assets/6.png";
-import { auth, db } from "./firebaseConfig";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import { doc, setDoc } from "firebase/firestore";
-import { getStorage, ref } from "firebase/storage";
+import SimpleNav from "./components/SimpleNav";
+import Footer from "./components/Footer";
 
 export default function SignUp() {
-  const [fullName, setFullName] = useState();
-  const [acc, setAcc] = useState("client"); // Account Type State
-  const [email, setEmail] = useState("johnsmith@gmail.com");
-  const [password, setPassword] = useState("••••••••");
-  const storage = getStorage();
-  const mediaRef = ref(storage, "images");
-
-  const Navigate = useNavigate();
-
-  function handleSubmit() {
-    console.log(
-      "Acc Type: " + acc + " Email: " + email + " Password" + password
-    );
-  }
-
-  async function handleSignUp(event) {
-    event.preventDefault(); // Prevent default form submission behavior
-
-    try {
-      const userCredentials = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredentials.user;
-      const id = auth.currentUser.uid;
-
-      if (acc == "student") {
-        await setDoc(doc(db, `${acc}`, `${id}`), {
-          description: "",
-          portfolio: {},
-        });
-      } else {
-        // Clients
-        await setDoc(doc(db, `${acc}`, `${id}`), {
-          hires: {},
-          favoriteStudents: {},
-        });
-      }
-
-      updateProfile(auth.currentUser, {
-        displayName: fullName,
-      });
-      const path = acc === "client" ? "clientdash" : "studentdash";
-      Navigate(`/${path}`);
-    } catch (error) {
-      console.log("An Error occured when creating a user: " + error);
-    }
-
-    handleSubmit();
-  }
+  const off = `<?xml version="1.0" encoding="utf-8"?>
+  <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+  <svg width="24px" height="24px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <title>ionicons-v5-e</title>
+    <path d="M448,256c0-106-86-192-192-192S64,150,64,256s86,192,192,192S448,362,448,256Z" style="fill:none;stroke:#0D1717;stroke-miterlimit:10;stroke-width:32px;stroke-opacity:0.15;fill-opacity:0.15"/>
+  </svg>`;
+  const [circle, setCircle] = useState();
   return (
     <>
-      <section className="bg-[url('./assets/signup-bg.png')] dark:bg-gray-900 bg-cover">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-          <a
-            href="#"
-            className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-          >
-            <img className="w-[75px] h-[75px] mr-2" src={logo} alt="logo" />
-          </a>
-          <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
-                Join Today
-              </h1>
-              <form className="space-y-4 md:space-y-6" onSubmit={handleSignUp}>
-                <div>
-                  <label
-                    htmlFor="account"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Choose an account
-                  </label>
-                  <select
-                    onChange={(event) => {
-                      setAcc(event.target.value);
-                    }}
-                    id="account"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  >
-                    <option value="client">Client</option>
-                    <option value="student">Student</option>
-                  </select>
-                </div>
-                <div>
-                  <label
-                    htmlFor="fullName"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Full name
-                  </label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    id="fullName"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="John Smith"
-                    onChange={(event) => {
-                      setFullName(event.target.value);
-                    }}
-                    required=""
+      <section className="signup w-full h-[70vh] font-customs bg-white">
+        <SimpleNav />
+        <div className="title">
+          {" "}
+          <h1 className="text-black text-3xl text-center font-bold">
+            Join as a client or freelancer
+          </h1>
+        </div>
+        <div className="w-[36%] mx-auto mt-10">
+          <div className="inline-flex w-full">
+            <div className="client w-[48%] h-[30%] mr-[4%] py-5 border-[#0D1717] border-opacity-15 border-[1px]">
+              <div className="ml-[90%] r-2 circleSVG">
+                <div
+                  className="circle"
+                  dangerouslySetInnerHTML={{ __html: off }}
+                />
+              </div>
+              {/* SUITCASE SVG */}
+              <svg
+                className="ml-3 "
+                width="20"
+                height="17"
+                viewBox="0 0 20 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14 3H16V17H4V3H6V2C6 1.46957 6.21071 0.960859 6.58579 0.585786C6.96086 0.210714 7.46957 0 8 0H12C12.5304 0 13.0391 0.210714 13.4142 0.585786C13.7893 0.960859 14 1.46957 14 2V3ZM17 3H18C18.5304 3 19.0391 3.21071 19.4142 3.58579C19.7893 3.96086 20 4.46957 20 5V15C20 15.5304 19.7893 16.0391 19.4142 16.4142C19.0391 16.7893 18.5304 17 18 17H17V3ZM3 3V17H2C1.46957 17 0.960859 16.7893 0.585786 16.4142C0.210714 16.0391 0 15.5304 0 15V5C0 3.9 0.9 3 2 3H3ZM8 2V3H12V2H8Z"
+                  fill="#004439"
+                />
+              </svg>
+              <div className="text mt-3 ml-3 text-black text-xl font-medium">
+                I’m a client, hiring for a project
+              </div>
+            </div>
+            <div className="student w-[48%] py-5 border-[#0D1717] border-opacity-15 border-[1px]">
+              <div className="ml-[90%]">
+                <div
+                  className="circle"
+                  dangerouslySetInnerHTML={{ __html: off }}
+                />
+              </div>
+              {/* LAPTOP SVG */}
+
+              <svg
+                className="mt-[-3%] ml-3 mr-2"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clipPath="url(#clip0_555_12631)">
+                  <path
+                    d="M20.9999 19C21.2547 19.0003 21.4999 19.0979 21.6852 19.2728C21.8706 19.4478 21.9821 19.687 21.997 19.9414C22.012 20.1958 21.9292 20.4464 21.7656 20.6418C21.602 20.8373 21.37 20.9629 21.1169 20.993L20.9999 21H2.99987C2.74499 20.9997 2.49984 20.9021 2.3145 20.7272C2.12916 20.5522 2.01763 20.313 2.0027 20.0586C1.98776 19.8042 2.07054 19.5536 2.23413 19.3582C2.39772 19.1627 2.62977 19.0371 2.88287 19.007L2.99987 19H20.9999ZM18.9999 4C19.5044 3.99984 19.9904 4.19041 20.3604 4.5335C20.7304 4.87659 20.957 5.34684 20.9949 5.85L20.9999 6V16C21 16.5046 20.8095 16.9906 20.4664 17.3605C20.1233 17.7305 19.653 17.9572 19.1499 17.995L18.9999 18H4.99987C4.49529 18.0002 4.0093 17.8096 3.63932 17.4665C3.26934 17.1234 3.04271 16.6532 3.00487 16.15L2.99987 16V6C2.99971 5.49542 3.19028 5.00943 3.53337 4.63945C3.87646 4.26947 4.34671 4.04284 4.84987 4.005L4.99987 4H18.9999Z"
+                    fill="#004439"
                   />
-                </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Your email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="name@domain.com"
-                    required=""
-                    onChange={(event) => {
-                      setEmail(event.target.value);
-                    }}
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required=""
-                    onChange={(event) => {
-                      setPassword(event.target.value);
-                    }}
-                  />
-                </div>
-                <div className="flex items-start">
-                  <div className="flex items-center h-5">
-                    <input
-                      id="terms"
-                      aria-describedby="terms"
-                      type="checkbox"
-                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                      required=""
-                    />
-                  </div>
-                  <div className="ml-3 text-sm">
-                    <label
-                      htmlFor="terms"
-                      className="font-light text-gray-500 dark:text-gray-300"
-                    >
-                      I accept the{" "}
-                      <a
-                        className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                        href="#"
-                      >
-                        Terms and Conditions
-                      </a>
-                    </label>
-                  </div>
-                </div>
-                <button
-                  type="submit"
-                  className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                >
-                  Create an account
-                </button>
-                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Already have an account?{" "}
-                  <a
-                    href="#"
-                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                  >
-                    Login here
-                  </a>
-                </p>
-              </form>
+                </g>
+                <defs>
+                  <clipPath id="clip0_555_12631">
+                    <rect width="24" height="24" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+              <div className="text mt-3 ml-3 text-black text-xl font-medium">
+                I’m a student, looking for work
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-6">
+            <button className="ease-in transition-all inline-flex items-center justify-center px-6 py-2 bg-[#E9E920] hover:bg-[#2C3835] hover:text-white rounded-2xl font-bold text-base text-[#004439]">
+              Create Account
+            </button>
+            <div className="text-black mt-2">
+              Already have an account{" "}
+              <a href="#" className="text-[#004439] underline">
+                Log In
+              </a>
             </div>
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 }

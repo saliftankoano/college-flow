@@ -66,7 +66,7 @@ export default function Best() {
 
         {/* BEST Image */}
         <img
-          className="col-start-2 col-end-12 row-start-1 row-end-9 z-10 pt-[20%]"
+          className="col-start-2 col-end-12 row-start-1 row-end-9 z-10 pt-[17%]"
           src={best}
         />
         {/* THE BEST TEXT */}
@@ -77,7 +77,7 @@ export default function Best() {
             Get Started
           </button>
         </div>
-        <div className=" h-[28%] w-[125%] prop 1 text-white text-base col-start-6 col-end-8 row-start-1 row-end-1 z-10 mt-[150%] ml-[65%]">
+        <div className=" h-[28%] w-[125%] prop 1 text-white text-base col-start-6 col-end-8 row-start-1 row-end-1 z-10 mt-[135%] ml-[65%]">
           <h2 className="text-lg font-semibold text-[#E9E920]">
             1. Stick to your budget
           </h2>
@@ -87,7 +87,7 @@ export default function Best() {
           </div>
           <div className="line ms-[8%] mt-4 border-b-[2px] h-[3px] border-[#E9E920] w-1/3"></div>
         </div>
-        <div className=" h-[28%] w-[125%] prop 2 text-white text-base col-start-8 col-end-10 row-start-2 row-end-2 z-10 mt-[12%] ml-[47%]">
+        <div className=" h-[28%] w-[125%] prop 2 text-white text-base col-start-8 col-end-10 row-start-2 row-end-2 z-10 mt-[9%] ml-[47%]">
           <h2 className="text-lg font-semibold text-[#E9E920]">
             2. Get quality work done quickly
           </h2>

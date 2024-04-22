@@ -53,7 +53,7 @@ export default function Hero() {
             viewBox="0 0 13 13"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="absolute right-[10%] top-[15%] z-0"
+            className="absolute right-[18%] top-[17%] z-0 animate-moveDiagonal"
           >
             <circle cx="6.5" cy="6.5" r="6.5" fill="#E9E920" />
           </svg>

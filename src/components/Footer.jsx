@@ -4,14 +4,14 @@ import "../index.css";
 export default function Footer() {
   return (
     <>
-      <footer className="footer bg-[#2C3835] h-[35vh]">
+      <footer className="footer bg-[#2C3835]">
         <div className="inside px-[3.8%] pt-[4%] w-full h-[34vh] inline-flex">
           <div className="w-[30.56%]">
             <img src={logo} alt="college flow logo" className="w-[30%]" />
             <img src={circle} alt="circle" className="w-[30%] z-0 ml-[-17%]" />
           </div>
           <div className="line border-s-[1px] h-[150px] border-white opacity-20"></div>
-          <div className="center w-[30.56%] block">
+          <div className="center w-[36%] block">
             <div className="links text-center text-white">
               <div className="services w-full flex place-content-evenly">
                 <a href="#" className="Home w-1/2">
@@ -36,28 +36,29 @@ export default function Footer() {
           </div>
           <div className="line border-s-[1px] h-[150px] border-white opacity-20"></div>
 
-          <div className="right w-[29%] ps-[10%] ">
+          <div className="right ps-[10%] ">
             <div className="text-white">
               <form>
                 <label
                   htmlFor="search"
-                  className="text-lg font-customs font-medium text-white mb-8"
+                  className="text-lg block font-customs font-medium text-white mb-2"
                 >
                   Stay up to date
                 </label>
-                <div className="relative">
+                <div className="inline-flex">
                   <input
                     type="search"
                     id="search"
-                    className="email-input block w-full p-4 ps-10 text-sm bg-white opacity-20 border border-gray-300 rounded-lg placeholder-white "
+                    className="email-input w-full h-[50%]p-4 ps-10 text-sm placeholder-white opacity-20 border border-gray-300 rounded-lg "
                     placeholder="Your email address"
                     required
                   />
                   <button
                     type="submit"
-                    className=" absolute end-2.5 bottom-2.5 focus:ring-4 focus:outline-none  rounded-lg px-4 py-2 "
+                    className="grid grid-cols-1 grid-rows-1 focus:ring-4 focus:outline-none  rounded-lg px-4 py-2 "
                   >
                     <svg
+                      className="relative left-[-10%]"
                       width="18"
                       height="18"
                       viewBox="0 0 18 18"
@@ -81,6 +82,72 @@ export default function Footer() {
                   </button>
                 </div>
               </form>
+            </div>
+            <div className="social inline-flex  space-x-4 mt-3">
+              {/* FACEBOOK LOGO */}
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  x="0.000976562"
+                  width="32"
+                  height="32"
+                  rx="5"
+                  fill="white"
+                  fillOpacity="0.2"
+                />
+                <path
+                  d="M26.001 16C26.001 10.48 21.521 6 16.001 6C10.481 6 6.00098 10.48 6.00098 16C6.00098 20.84 9.44098 24.87 14.001 25.8V19H12.001V16H14.001V13.5C14.001 11.57 15.571 10 17.501 10H20.001V13H18.001C17.451 13 17.001 13.45 17.001 14V16H20.001V19H17.001V25.95C22.051 25.45 26.001 21.19 26.001 16Z"
+                  fill="white"
+                />
+              </svg>
+
+              {/* X LOGO */}
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  x="0.000976562"
+                  width="32"
+                  height="32"
+                  rx="5"
+                  fill="white"
+                  fillOpacity="0.2"
+                />
+                <path
+                  d="M21.7521 6.025H24.8189L18.1189 14.4756L26.001 25.975H19.8294L14.9956 19.0007L9.46457 25.975H6.39591L13.5623 16.9361L6.00098 6.025H12.3293L16.6986 12.3998L21.7521 6.025ZM20.6758 23.9493H22.3751L11.4059 7.94429H9.58231L20.6758 23.9493Z"
+                  fill="white"
+                />
+              </svg>
+
+              {/* YT LOGO */}
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  width="32"
+                  height="32"
+                  rx="5"
+                  fill="white"
+                  fillOpacity="0.2"
+                />
+                <path
+                  d="M14 19L19.19 16L14 13V19ZM25.56 11.17C25.69 11.64 25.78 12.27 25.84 13.07C25.91 13.87 25.94 14.56 25.94 15.16L26 16C26 18.19 25.84 19.8 25.56 20.83C25.31 21.73 24.73 22.31 23.83 22.56C23.36 22.69 22.5 22.78 21.18 22.84C19.88 22.91 18.69 22.94 17.59 22.94L16 23C11.81 23 9.2 22.84 8.17 22.56C7.27 22.31 6.69 21.73 6.44 20.83C6.31 20.36 6.22 19.73 6.16 18.93C6.09 18.13 6.06 17.44 6.06 16.84L6 16C6 13.81 6.16 12.2 6.44 11.17C6.69 10.27 7.27 9.69 8.17 9.44C8.64 9.31 9.5 9.22 10.82 9.16C12.12 9.09 13.31 9.06 14.41 9.06L16 9C20.19 9 22.8 9.16 23.83 9.44C24.73 9.69 25.31 10.27 25.56 11.17Z"
+                  fill="white"
+                />
+              </svg>
             </div>
           </div>
         </div>

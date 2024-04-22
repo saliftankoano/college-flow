@@ -21,6 +21,20 @@
       transform: translateX(-410%);
     }
   }
+  @keyframes moveDiagonal {
+    0% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(100px, 100px);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+  .animate-moveDiagonal {
+    animation-duration: 10s;
+  }
 }
 
 .background-student {
