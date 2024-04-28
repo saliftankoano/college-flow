@@ -33,10 +33,10 @@ export default function SignIn() {
 
         if (userData.accountType === "Student") {
           const { accountType, description, portfolio, order } = userData;
-          Navigate("/studentdash");
+          Navigate("/student");
         } else {
           const { accountType, hires, favorites } = userData;
-          Navigate("/clientDash");
+          Navigate("/client");
         }
       }
     } catch (error) {

@@ -7,5 +7,5 @@ dotenv.config();
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  assetsInclude: ["**/*.woff", "**/*.woff2"],
+  assetsInclude: ["**/*.ttf", "**/*.woff", "**/*.woff2"],
 });

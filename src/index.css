@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: "mona";
+    font-style: normal;
+    font-weight: 500;
+    src: url(./assets/mona.woff) format("woff");
+  }
+  @font-face {
+    font-family: "monaswb";
+    src: url(./assets/mona-swb.woff) format("woff");
+  }
+}
 .backgrounds {
   z-index: -5;
 }
@@ -20,20 +32,6 @@
     to {
       transform: translateX(-410%);
     }
-  }
-  @keyframes moveDiagonal {
-    0% {
-      transform: translate(0, 0);
-    }
-    50% {
-      transform: translate(100px, 100px);
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
-  .animate-moveDiagonal {
-    animation-duration: 10s;
   }
 }
 
