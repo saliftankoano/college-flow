@@ -1,6 +1,6 @@
 # College Flow - The Fiverr of CUNY
 
-![College Flow Logo](./src/assets/cfw.svg)
+![College Flow Logo](./src/assets/cfc.svg)
 
 College Flow is an exciting web application tailored for the vibrant CUNY community. It serves as a dynamic marketplace connecting talented students with businesses and individuals seeking their expertise. Similar to Fiverr, College Flow empowers students to showcase their skills and land freelance gigs, all within the CUNY ecosystem.
 
