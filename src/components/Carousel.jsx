@@ -3,7 +3,7 @@ import webVideo from "../assets/videos/web.mp4";
 import designVideo from "../assets/videos/design.mp4";
 import digitalVideo from "../assets/videos/digital.mp4";
 import edVideo from "../assets/videos/education.mp4";
-import maVideo from "../assets/videos/marketing.mp4";
+import consultVideo from "../assets/videos/consult.mp4";
 import artVideo from "../assets/videos/art.mp4";
 import viVideo from "../assets/videos/video.mp4";
 import vrVideo from "../assets/videos/vr.mp4";
@@ -17,11 +17,35 @@ const videos = [
   designVideo,
   digitalVideo,
   edVideo,
-  maVideo,
+  consultVideo,
   artVideo,
   viVideo,
   vrVideo,
   bizVideo,
+];
+const categoryNames = [
+  "Artificial Intelligence",
+  "Web Development",
+  "Design",
+  "Digital Marketing",
+  "Education",
+  "Consulting",
+  "Art",
+  "Videograpgy",
+  "Virtual Reality",
+  "Business",
+];
+const categoryHeading = [
+  "AI Made Easy",
+  "The Best Websites",
+  "Delightful Aesthetics",
+  "Grow Your Reach",
+  "Learn With Pros ",
+  "Receive Guidance",
+  "Free Expression",
+  "Capture The Moment",
+  "Beyond This World",
+  "Get To The Bag",
 ];
 
 export default function Carousel() {
@@ -70,10 +94,10 @@ export default function Carousel() {
                 >
                   <div className="Upper-text text-white z-10 absolute mt-[2%] ps-[2%]">
                     <span className="font-light text-white">
-                      The best websites {videoIndex}
+                      {categoryHeading[pos + offset]}
                     </span>
                     <h1 className="w-[94%] font-extrabold italic ">
-                      Web Development
+                      {categoryNames[pos + offset]}
                     </h1>
                   </div>
                   <div className="video z-0 overflow-hidden">

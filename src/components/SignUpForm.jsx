@@ -10,7 +10,6 @@ export default function SignUpForm(props) {
   const entity = props.entity; // Type Of entityount
 
   const storage = getStorage();
-  const mediaRef = ref(storage, "images");
   const Navigate = useNavigate(); // Initialize useNavigate hook
 
   const SignupSchema = Yup.object().shape({
@@ -35,22 +34,6 @@ export default function SignUpForm(props) {
       );
       const user = userCredentials.user;
       const id = auth.currentUser.uid;
-
-      if (entity == "Student") {
-        await setDoc(doc(db, `users`, `${id}`), {
-          accountType: entity,
-          description: "",
-          portfolio: {},
-          order: {},
-        });
-      } else {
-        // Clients
-        await setDoc(doc(db, `users`, `${id}`), {
-          accountType: entity,
-          hires: {},
-          favorites: {},
-        });
-      }
 
       updateProfile(auth.currentUser, {
         displayName: fullName,
