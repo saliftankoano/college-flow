@@ -7,8 +7,6 @@ College Flow is an exciting web application tailored for the vibrant CUNY commun
 ## Team Members
 
 - **Salif Tankoano**
-  - Email: tanksalif@gmail.com
-  - Slack: Salif T
   - Affiliation: Lehman College
 
 ## Concept
