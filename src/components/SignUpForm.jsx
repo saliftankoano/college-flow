@@ -39,6 +39,10 @@ export default function SignUpForm(props) {
         displayName: fullName,
       });
       const path = entity === "Client" ? "clientdash" : "studentdash";
+      const newPath = entity == "Client" ? "clients" : "students";
+      const docRef = doc(db, `${newPath}/${auth.currentUser.uid}`);
+      setDoc(docRef, {});
+      // setDoc(docRef, )
       Navigate(`/${path}`);
     } catch (error) {
       console.error("Error occurred during sign up:", error);

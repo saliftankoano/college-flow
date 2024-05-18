@@ -6,11 +6,15 @@ import profile from "../assets/profile.svg";
 import sun from "../assets/sun.svg";
 import moon from "../assets/moon.svg";
 
-export default function BackNav({ themeSelector, navSelector, onThemeChange }) {
+export default function BackNav({ themeSelector, navSelector }) {
   const [clientNav, setClientNav] = useState("marketplace");
-  const [theme, setTheme] = useState("bg-white");
+  const [theme, setTheme] = useState(" bg-white");
   const [logo, setLogo] = useState("light");
   const [text, setText] = useState("text-[#0D1717]");
+  const [showDash, setShowDash] = useState(" opacity-60");
+  const [showMarket, setShowMarket] = useState(" opacity-100");
+  const [showChat, setShowChat] = useState(" opacity-60");
+
   const Navigate = useNavigate();
 
   // Save initial states in LocalStorage for persistent storage across pages
@@ -31,13 +35,26 @@ export default function BackNav({ themeSelector, navSelector, onThemeChange }) {
   function handleNavSelector(navChosen) {
     setClientNav(navChosen);
     navSelector(navChosen);
+    if (navChosen == "dashboard") {
+      setShowDash(" opacity-100");
+      setShowMarket(" opacity-60");
+      setShowChat(" opacity-60");
+    } else if (navChosen == "marketplace") {
+      setShowDash(" opacity-60");
+      setShowMarket(" opacity-100");
+      setShowChat(" opacity-60");
+    } else {
+      setShowChat(" opacity-100");
+      setShowMarket(" opacity-60");
+      setShowDash(" opacity-60");
+    }
   }
 
   // Toggle theme
   function handleTheme() {
-    setText(text === "text-[#0D1717]" ? "text-white" : "text-[#0D1717]");
+    setText(text === " text-[#0D1717]" ? " text-white" : " text-[#0D1717]");
     setLogo(logo === "light" ? "dark" : "light");
-    setTheme(theme === "bg-white" ? "dark: bg-[#0D1717]" : "bg-white");
+    setTheme(theme === " bg-white" ? " dark: bg-[#0D1717]" : " bg-white");
     handleThemeSelector(theme); // Pass the updated theme to the handler
     localStorage.setItem("text", text);
     localStorage.setItem("theme", theme);
@@ -60,19 +77,19 @@ export default function BackNav({ themeSelector, navSelector, onThemeChange }) {
           className={`ml-[5%] font-customs font-medium text-base inline-flex ${text} space-x-6 items-center`}
         >
           <div
-            className="dash opacity-60 hover:cursor-pointer"
+            className={`dash ${showDash} hover:cursor-pointer`}
             onClick={() => handleNavSelector("dashboard")}
           >
             Dashboard
           </div>
           <div
-            className="market hover:cursor-pointer"
+            className={`market ${showMarket} hover:cursor-pointer`}
             onClick={() => handleNavSelector("marketplace")}
           >
             Marketplace
           </div>
           <div
-            className="dash opacity-60 hover:cursor-pointer"
+            className={`dash ${showChat} hover:cursor-pointer`}
             onClick={() => handleNavSelector("chat")}
           >
             Chat
@@ -82,7 +99,7 @@ export default function BackNav({ themeSelector, navSelector, onThemeChange }) {
           className="toggle-btn flex items-center ml-[55%] hover:cursor-pointer"
           onClick={handleTheme}
         >
-          {theme === "bg-white" ? (
+          {theme === " bg-white" ? (
             <img src={moon} alt="moon icon" />
           ) : (
             <img src={sun} alt="sun icon" />

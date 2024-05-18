@@ -5,6 +5,8 @@ import { doc, setDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { FileInput, Label, Modal, Button } from "flowbite-react";
 import React, { useState, useEffect } from "react";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+
 import { nanoid } from "nanoid";
 
 const categories = [
@@ -45,14 +47,89 @@ export default function ProjectForm(props) {
   // Inside your functional component
   useEffect(() => {}, [imgFiles, vidFiles, docFiles]);
 
+  const uploadToS3 = async (projectID) => {
+    // Create S3 Connection
+    const s3 = new S3Client({
+      credentials: {
+        accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
+        secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY,
+      },
+      region: import.meta.env.VITE_S3_REGION,
+    });
+    //Upload all Images
+    try {
+      await Promise.all(
+        imgFiles.map(async (image) => {
+          /* Specify the bucket name & what goes in there */
+          const params = {
+            Bucket: import.meta.env.VITE_S3_BUCKET,
+            Key: `${projectID}/images/${image.name}`,
+            Body: image,
+            ACL: "public-read", // Allows reads by default
+          };
+          // Create the command to send the object
+          const command = new PutObjectCommand(params);
+          //Now send the command
+          await s3.send(command);
+        })
+      );
+      console.log("Succesfully uploaded all images");
+    } catch (error) {
+      console.log("Error uploading images: " + error);
+    }
+    //Upload all Videos
+    try {
+      await Promise.all(
+        vidFiles.map(async (video) => {
+          /* Specify the bucket name & what goes in there */
+          const params = {
+            Bucket: import.meta.env.VITE_S3_BUCKET,
+            Key: `${projectID}/videos/${video.name}`,
+            Body: video,
+            ACL: "public-read", // Allows reads by default
+          };
+          // Create the command to send the video
+          const command = new PutObjectCommand(params);
+          //Now send the command
+          await s3.send(command);
+        })
+      );
+      console.log("Succesfully uploaded all videos");
+    } catch (error) {
+      console.log("Error uploading videos: " + error);
+    }
+    //Upload all Docs
+    try {
+      await Promise.all(
+        docFiles.map(async (doc) => {
+          /* Specify the bucket name & what goes in there */
+          const params = {
+            Bucket: import.meta.env.VITE_S3_BUCKET,
+            Key: `${projectID}/documents/${doc.name}`,
+            Body: doc,
+            ACL: "public-read", // Allows reads by default
+          };
+          // Create the command to send the object
+          const command = new PutObjectCommand(params);
+          //Now send the command
+          await s3.send(command);
+        })
+      );
+      console.log("Succesfully uploaded all documents");
+    } catch (error) {
+      console.log("Error uploading documents: " + error);
+    }
+  };
+
   async function handleProjectSubmit(values) {
     //Form schema values ready to be transfered
     const { projectTitle, category, price, description } = values;
     const userId = auth.currentUser.uid;
     const displayName = auth.currentUser.displayName;
+
     try {
+      //Create a random ID of 10 characters
       const projectId = nanoid(10);
-      console.log(projectId);
       const metaData = {
         projectId: projectId,
         title: projectTitle,
@@ -62,57 +139,45 @@ export default function ProjectForm(props) {
         userId: userId,
         displayName: displayName,
       };
+      {
+        /* Set the metadata per student and its project */
+      }
       await setDoc(
         doc(db, `users`, `students`, `${userId}`, `${projectId}`),
         metaData
       );
+      {
+        /* Set the metadata for each category and project from total display of a category */
+      }
       await setDoc(doc(db, `${category}`, `${projectId}`), metaData);
+      uploadToS3(projectId);
       const storage = getStorage();
-
-      imgFiles.forEach((file, index) => {
-        const fileName = file.name;
-        const storageRef = ref(storage, `students/${projectId}/${fileName}`);
-
-        uploadBytes(storageRef, file).then((snapshot) => {});
-      });
-      vidFiles.forEach((file, index) => {
-        const fileName = file.name;
-        const storageRef = ref(
-          storage,
-          `users/students/${userId}/${projectId}/${fileName}`
-        );
-        uploadBytes(storageRef, file).then((snapshot) => {});
-      });
-      docFiles.forEach((file, index) => {
-        const fileName = file.name;
-        const storageRef = ref(
-          storage,
-          `users/students/${userId}/${projectTitle}/${fileName}`
-        );
-        uploadBytes(storageRef, file).then((snapshot) => {});
-      });
     } catch (error) {
       console.error("Error occurred during sign up:", error);
     }
   }
   const handleImgUpload = (event) => {
+    //Save the files in the upload elements for images
     const filesArray = Array.from(event.target.files);
     setImgFiles(filesArray);
   };
 
   const handleVidUpload = (event) => {
+    //Save the files in the upload elements for videos
+
     const filesArray = Array.from(event.target.files);
     setVidFiles(filesArray);
   };
 
   const handleDocsUpload = (event) => {
+    //Save the files in the upload elements for documents
     const filesArray = Array.from(event.target.files);
     setDocFiles(filesArray);
   };
 
   return (
     <>
-      <section className="w-full">
+      <section className="w-full bg-white">
         <div className="border-[#E9E9E9] border-[1px] rounded-md mt-8">
           <Formik
             initialValues={{
@@ -166,6 +231,10 @@ export default function ProjectForm(props) {
                     as="select"
                     className="w-[98%] mt-2 border-[#0D1717] border-opacity-15 rounded-md"
                   >
+                    <option value="" disabled>
+                      Select a category
+                    </option>
+
                     <option value="AI">AI</option>
                     <option value="Art">Art</option>
                     <option value="Business">Business</option>

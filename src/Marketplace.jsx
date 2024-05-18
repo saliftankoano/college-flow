@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
 import { auth, db } from "./firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
+import { collection, getDocs } from "firebase/firestore";
+import { getDownloadURL, getStorage, ref, listAll } from "firebase/storage";
+import { S3Client, ListObjectsCommand } from "@aws-sdk/client-s3";
 
 export default function Marketplace() {
+  const storage = getStorage();
   const [displayName, setDisplayName] = useState();
   const [categoryFocus, setCategoryFocus] = useState("None");
+  const [categoryData, setCategoryData] = useState([]);
+
   const [artBg, setArtBg] = useState();
 
   const [aiBg, setAiBg] = useState();
@@ -16,6 +22,10 @@ export default function Marketplace() {
   const [bizBg, setBizBg] = useState();
   const [theme, setTheme] = useState(localStorage.getItem("theme"));
   const [text, setText] = useState(localStorage.getItem("text"));
+  const [projectIds, setProjectIds] = useState([]);
+  const [imgUrls, setImgUrls] = useState([]);
+  const [videoUrls, setVideoUrls] = useState([]);
+  const [docUrls, setDocUrls] = useState([]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -27,6 +37,124 @@ export default function Marketplace() {
       }
     });
   }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (categoryFocus !== "None") {
+        const categoryDocs = await getDocs(collection(db, categoryFocus));
+        const data = categoryDocs.docs.map((project) => project.data());
+        setCategoryData(data);
+
+        await Promise.all(
+          data.map(async (project) => {
+            const projectID = project.projectId;
+            await getAllUrls(projectID);
+          })
+        );
+      }
+    }
+    fetchData();
+  }, [categoryFocus]);
+
+  async function getAllUrls(projectID) {
+    //Prepare the s3 connection
+    const s3 = new S3Client({
+      credentials: {
+        accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
+        secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY,
+      },
+      region: import.meta.env.VITE_S3_REGION,
+    });
+
+    /* Step 1 Images */
+
+    try {
+      //Add bucket name and path
+      const imageParams = {
+        Bucket: import.meta.env.VITE_S3_BUCKET,
+        Prefix: `${projectID}/images/`,
+      };
+      //Prepare command to list the objects
+      const imageCommand = new ListObjectsCommand(imageParams);
+      //Send the command to get the images
+      const imageResponse = await s3.send(imageCommand);
+      console.log("imageResponse.Contents:", imageResponse.Contents); // Log contents before map
+
+      const imageUrls = imageResponse.Contents
+        ? imageResponse.Contents.map(
+            (obj) =>
+              `https://${import.meta.env.VITE_S3_BUCKET}.s3.amazonaws.com/${
+                obj.Key
+              }`
+          )
+        : [];
+      setImgUrls(imageUrls);
+      console.log(imageUrls);
+      // Update the imageUrls state or perform any other actions with the URLs here
+    } catch (error) {
+      console.error("Error fetching image URLs:", error);
+      // Define imageUrls as an empty array to prevent ReferenceError
+      const imageUrls = [];
+    }
+
+    /* Step 2 Videos */
+    try {
+      //Prepare video parameter: Add bucket name and prefix
+      const videoParams = {
+        Bucket: import.meta.env.VITE_S3_BUCKET,
+        Prefix: `${projectID}/videos/`,
+      };
+      // Prepare command to List the objects
+      const videoCommand = new ListObjectsCommand(videoParams);
+      //Send the command to get the videos
+      const videoResponse = s3.send(videoCommand);
+      const videoUrls = (await videoResponse).Contents.map(
+        (obj) =>
+          `https://${import.meta.env.VITE_S3_BUCKET}.s3.amazonaws.com/${
+            obj.Key
+          }`
+      );
+      console.log(videoUrls);
+      setVideoUrls(videoUrls);
+    } catch (error) {
+      console.log(error);
+    }
+
+    /* Step 3 Documents */
+
+    try {
+      //Prepare the command parameter
+      const documentsParams = {
+        Bucket: import.meta.env.VITE_S3_BUCKET,
+        Prefix: `${projectID}/documents/`,
+      };
+      //
+      const documentsCommand = new ListObjectsCommand(documentsParams);
+      const documentsResponse = s3.send(documentsCommand);
+
+      const documentsUrls = (await documentsResponse).Contents.map(
+        (obj) =>
+          `https://${import.meta.env.VITE_S3_BUCKET}.s3.amazonaws.com/${
+            obj.Key
+          }`
+      );
+      console.log(documentsUrls);
+      setDocUrls(documentsUrls);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function displayCategoryData() {
+    return categoryData.map((item, index) => (
+      <div key={index} className="data-container text-black w-[20%] mx-4">
+        <img className="w-[100%]" src={imgUrls[index]} alt="Project Image" />
+        <h2>Title: {item.title}</h2>
+        <h2>Price: ${item.price} USD</h2>
+        <h2>By: {item.user}</h2>
+      </div>
+    ));
+  }
 
   if (!displayName) {
     return null;
@@ -85,14 +213,14 @@ export default function Marketplace() {
 
   return (
     <>
-      <div className={`${theme} h-full`}>
+      <div className={`${theme} h-[100vh]`}>
         <div
-          className={`text-2xl text-black font-monaswb w-2/4 font-semibold text-center mx-auto`}
+          className={`text-2xl text-black font-monaswb w-2/4 font-semibold text-center mx-auto pt-8`}
         >
           Explore a curated selection of interactive design projects, from
           advanced web design to detailed illustrations
         </div>
-        <div className="menu-options w-full mt-4 inline-flex items-center justify-center text-[#004439] ">
+        <div className="menu-options w-full mt-4 inline-flex flex-wrap items-center justify-center text-[#004439] ">
           <div
             onClick={handleAi}
             className={`hover: cursor-pointer ai py-1 px-4 h-[10%] mx-4 ${aiBg} border-[#004439] border-opacity-30 border-[1px] rounded-xl text-center`}
@@ -142,12 +270,18 @@ export default function Marketplace() {
             Art
           </div>
         </div>
-        {auth != null && (
-          <h1 className="text-4xl">
-            {" "}
-            Welcome dear Client: {displayName} Focus: {categoryFocus}{" "}
-          </h1>
-        )}
+        {/* Category data */}
+        {
+          <div className="category-data">
+            {categoryFocus == "None" ? (
+              <h1 className="text-4xl text-center">Please select a Category</h1>
+            ) : (
+              <div className="data px-4 flex flex-wrap mt-4">
+                {displayCategoryData()}
+              </div>
+            )}
+          </div>
+        }
       </div>
     </>
   );

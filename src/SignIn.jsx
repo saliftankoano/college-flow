@@ -26,18 +26,17 @@ export default function SignIn() {
       const user = userCredentials.user;
       const id = auth.currentUser.uid;
       // Query for to determine user account type
-      const userDocRef = doc(db, "users", id);
-      const userDoc = await getDoc(userDocRef);
-      if (userDoc.exists()) {
-        const userData = userDoc.data();
+      const stuDocRef = doc(db, `students/${id}`);
+      const cliDocRef = doc(db, `clients/${id}`);
 
-        if (userData.accountType === "Student") {
-          const { accountType, description, portfolio, order } = userData;
-          Navigate("/student");
-        } else {
-          const { accountType, hires, favorites } = userData;
-          Navigate("/client");
-        }
+      const stuDoc = await getDoc(stuDocRef);
+
+      if (stuDoc.exists()) {
+        Navigate("/studentdash");
+      } else if (cliDocRef.exists()) {
+        Navigate("/clientdash");
+      } else {
+        console.log(`User unfound !!!`);
       }
     } catch (error) {
       console.log("An error occured: " + error);
