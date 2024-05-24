@@ -45,18 +45,20 @@ export default function Marketplace() {
         const data = categoryDocs.docs.map((project) => project.data());
         setCategoryData(data);
 
-        await Promise.all(
-          data.map(async (project) => {
-            const projectID = project.projectId;
-            await getAllUrls(projectID);
-          })
-        );
+        let allProjectUrls = [];
+        for (const project of data) {
+          // Loop through project data
+          const projectID = project.projectId;
+          const projectImageUrl = await getImgUrl(projectID); // Fetch URL for each project
+          allProjectUrls.push(projectImageUrl);
+        }
+        setImgUrls(allProjectUrls);
       }
     }
     fetchData();
   }, [categoryFocus]);
 
-  async function getAllUrls(projectID) {
+  async function getImgUrl(projectID) {
     //Prepare the s3 connection
     const s3 = new S3Client({
       credentials: {
@@ -66,7 +68,7 @@ export default function Marketplace() {
       region: import.meta.env.VITE_S3_REGION,
     });
 
-    /* Step 1 Images */
+    /* Step 1 Image */
 
     try {
       //Add bucket name and path
@@ -78,9 +80,8 @@ export default function Marketplace() {
       const imageCommand = new ListObjectsCommand(imageParams);
       //Send the command to get the images
       const imageResponse = await s3.send(imageCommand);
-      console.log("imageResponse.Contents:", imageResponse.Contents); // Log contents before map
 
-      const imageUrls = imageResponse.Contents
+      const imageUrl = imageResponse.Contents
         ? imageResponse.Contents.map(
             (obj) =>
               `https://${import.meta.env.VITE_S3_BUCKET}.s3.amazonaws.com/${
@@ -88,70 +89,29 @@ export default function Marketplace() {
               }`
           )
         : [];
-      setImgUrls(imageUrls);
-      console.log(imageUrls);
+      return imageUrl;
       // Update the imageUrls state or perform any other actions with the URLs here
     } catch (error) {
       console.error("Error fetching image URLs:", error);
-      // Define imageUrls as an empty array to prevent ReferenceError
-      const imageUrls = [];
-    }
-
-    /* Step 2 Videos */
-    try {
-      //Prepare video parameter: Add bucket name and prefix
-      const videoParams = {
-        Bucket: import.meta.env.VITE_S3_BUCKET,
-        Prefix: `${projectID}/videos/`,
-      };
-      // Prepare command to List the objects
-      const videoCommand = new ListObjectsCommand(videoParams);
-      //Send the command to get the videos
-      const videoResponse = s3.send(videoCommand);
-      const videoUrls = (await videoResponse).Contents.map(
-        (obj) =>
-          `https://${import.meta.env.VITE_S3_BUCKET}.s3.amazonaws.com/${
-            obj.Key
-          }`
-      );
-      console.log(videoUrls);
-      setVideoUrls(videoUrls);
-    } catch (error) {
-      console.log(error);
-    }
-
-    /* Step 3 Documents */
-
-    try {
-      //Prepare the command parameter
-      const documentsParams = {
-        Bucket: import.meta.env.VITE_S3_BUCKET,
-        Prefix: `${projectID}/documents/`,
-      };
-      //
-      const documentsCommand = new ListObjectsCommand(documentsParams);
-      const documentsResponse = s3.send(documentsCommand);
-
-      const documentsUrls = (await documentsResponse).Contents.map(
-        (obj) =>
-          `https://${import.meta.env.VITE_S3_BUCKET}.s3.amazonaws.com/${
-            obj.Key
-          }`
-      );
-      console.log(documentsUrls);
-      setDocUrls(documentsUrls);
-    } catch (error) {
-      console.log(error);
     }
   }
 
   function displayCategoryData() {
     return categoryData.map((item, index) => (
       <div key={index} className="data-container text-black w-[20%] mx-4">
-        <img className="w-[100%]" src={imgUrls[index]} alt="Project Image" />
-        <h2>Title: {item.title}</h2>
-        <h2>Price: ${item.price} USD</h2>
-        <h2>By: {item.user}</h2>
+        <img
+          className="w-[25vw] h-[28vh] rounded-md"
+          src={imgUrls[index]}
+          key={index}
+          alt="Project Image"
+        />
+        <div className="project-info mt-3 bg-[#F6FBFA] px-4">
+          <h2 className="text-sm flex justify-between font-bold mb-2">
+            {item.title}
+          </h2>
+          <h2>${item.price}</h2>
+          <h2>{item.displayName}</h2>
+        </div>
       </div>
     ));
   }
@@ -276,7 +236,7 @@ export default function Marketplace() {
             {categoryFocus == "None" ? (
               <h1 className="text-4xl text-center">Please select a Category</h1>
             ) : (
-              <div className="data px-4 flex flex-wrap mt-4">
+              <div className="data px-[2%] flex flex-wrap mt-4 w-[96%]">
                 {displayCategoryData()}
               </div>
             )}

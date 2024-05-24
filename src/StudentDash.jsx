@@ -42,14 +42,16 @@ export default function StudentDash() {
     setNav(navChosen);
     if (navChosen == "dashboard") {
       setShowMarket(false);
+      setShowChat(false);
       setShowDash(true);
     } else if (navChosen == "marketplace") {
       setShowDash(false);
+      setShowChat(false);
       setShowMarket(true);
     } else {
-      setShowChat(true);
       setShowDash(false);
       setShowMarket(false);
+      setShowChat(true);
     }
   };
   return (

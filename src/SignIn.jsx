@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import { auth, db } from "./firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { getDoc, doc } from "firebase/firestore";
-import { getStorage, ref } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 
 export default function SignIn() {

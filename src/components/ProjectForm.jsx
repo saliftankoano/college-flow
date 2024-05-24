@@ -29,7 +29,7 @@ export default function ProjectForm(props) {
   const ProjectSchema = Yup.object().shape({
     projectTitle: Yup.string()
       .min(5, "Too Short!")
-      .max(75, "Too Long!")
+      .max(32, "Too Long!")
       .required("Required"),
     category: Yup.string().min(1, "Too short").required("Required"),
     price: Yup.number().required("Required"),
@@ -44,7 +44,6 @@ export default function ProjectForm(props) {
   const [docFiles, setDocFiles] = useState([]);
   const [openModal, setOpenModal] = useState(false);
 
-  // Inside your functional component
   useEffect(() => {}, [imgFiles, vidFiles, docFiles]);
 
   const uploadToS3 = async (projectID) => {
@@ -285,7 +284,6 @@ export default function ProjectForm(props) {
                     sizing="sm"
                     accept=".mp4,.mov; max-size: 104857600"
                     onChange={(e) => handleVidUpload(e)}
-                    multiple
                   />
                 </div>
                 <div className="w-[96%] mb-2 mx-auto docs-upload">
