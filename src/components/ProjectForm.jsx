@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { auth, db } from "../firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage } from "firebase/storage";
 import { FileInput, Label, Modal, Button } from "flowbite-react";
 import React, { useState, useEffect } from "react";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
@@ -272,29 +272,6 @@ export default function ProjectForm(props) {
                     sizing="sm"
                     accept=".jpeg,.png,.jpg,.gif,.svg,.webp; max-size: 10485760"
                     onChange={(e) => handleImgUpload(e)}
-                    multiple
-                  />
-                </div>
-                <div className="w-[96%] mb-2 mx-auto video-upload">
-                  <div>
-                    <Label htmlFor="video-upload" value="Videos: 100MB Max" />
-                  </div>
-                  <FileInput
-                    name="video-upload"
-                    sizing="sm"
-                    accept=".mp4,.mov; max-size: 104857600"
-                    onChange={(e) => handleVidUpload(e)}
-                  />
-                </div>
-                <div className="w-[96%] mb-2 mx-auto docs-upload">
-                  <div>
-                    <Label htmlFor="small-file-upload" value="docs: 15MB Max" />
-                  </div>
-                  <FileInput
-                    name="docs-upload"
-                    sizing="sm"
-                    accept=".docx,.pdf,.csv,.txt; max-size: 15728640"
-                    onChange={(e) => handleDocsUpload(e)}
                     multiple
                   />
                 </div>

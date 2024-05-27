@@ -2,7 +2,7 @@ import Marketplace from "./Marketplace";
 import BackNav from "./components/BackNav";
 import { useState, useEffect } from "react";
 import ClientDash from "./components/ClientDash";
-import Chat from "./components/Chat";
+import Chat from "./Chat";
 import Footer from "./components/Footer";
 
 export default function Client() {

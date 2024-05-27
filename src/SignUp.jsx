@@ -101,7 +101,6 @@ export default function SignUp() {
                       />
                     </div>
                     {/* LAPTOP SVG */}
-
                     <svg
                       className="mt-[-3%] ml-3 mr-2"
                       width="24"

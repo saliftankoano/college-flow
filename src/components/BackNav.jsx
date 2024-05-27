@@ -11,9 +11,6 @@ export default function BackNav({ themeSelector, navSelector }) {
   const [theme, setTheme] = useState(" bg-white");
   const [logo, setLogo] = useState("light");
   const [text, setText] = useState("text-[#0D1717]");
-  const [showDash, setShowDash] = useState(" opacity-60");
-  const [showMarket, setShowMarket] = useState(" opacity-100");
-  const [showChat, setShowChat] = useState(" opacity-60");
 
   const Navigate = useNavigate();
 
@@ -25,6 +22,8 @@ export default function BackNav({ themeSelector, navSelector }) {
     localStorage.setItem("text", text);
   }, [clientNav, theme, logo, text]);
 
+  useEffect(() => {}, [clientNav]);
+
   // Handle theme selection
   function handleThemeSelector(themeChosen) {
     themeSelector(themeChosen);
@@ -35,19 +34,6 @@ export default function BackNav({ themeSelector, navSelector }) {
   function handleNavSelector(navChosen) {
     setClientNav(navChosen);
     navSelector(navChosen);
-    if (navChosen == "dashboard") {
-      setShowDash(" opacity-100");
-      setShowMarket(" opacity-60");
-      setShowChat(" opacity-60");
-    } else if (navChosen == "marketplace") {
-      setShowDash(" opacity-60");
-      setShowMarket(" opacity-100");
-      setShowChat(" opacity-60");
-    } else {
-      setShowChat(" opacity-100");
-      setShowMarket(" opacity-60");
-      setShowDash(" opacity-60");
-    }
   }
 
   // Toggle theme
@@ -67,30 +53,38 @@ export default function BackNav({ themeSelector, navSelector }) {
         className={`inline-flex py-2 w-full border-[1px] border-t-0 border-[#004439] border-opacity-10 ${theme}`}
       >
         <div className="logo w-[10%] flex justify-center">
-          {logo === "light" ? (
-            <img src={cfc} alt="light logo" />
-          ) : (
-            <img src={cfy} alt="dark logo" />
-          )}
+          <a href="/studentdash">
+            {logo === "light" ? (
+              <img src={cfc} alt="light logo" />
+            ) : (
+              <img src={cfy} alt="dark logo" />
+            )}
+          </a>
         </div>
         <div
           className={`ml-[5%] font-customs font-medium text-base inline-flex ${text} space-x-6 items-center`}
         >
           <div
-            className={`dash ${showDash} hover:cursor-pointer`}
-            onClick={() => handleNavSelector("dashboard")}
+            className={`account h-full content-center hover:cursor-pointer`}
+            onClick={() => {
+              handleNavSelector("account");
+            }}
           >
-            Dashboard
+            Account
           </div>
           <div
-            className={`market ${showMarket} hover:cursor-pointer`}
-            onClick={() => handleNavSelector("marketplace")}
+            className={`market h-full content-center hover:cursor-pointer`}
+            onClick={() => {
+              handleNavSelector("marketplace");
+            }}
           >
             Marketplace
           </div>
           <div
-            className={`dash ${showChat} hover:cursor-pointer`}
-            onClick={() => handleNavSelector("chat")}
+            className={`chat h-full content-center hover:cursor-pointer`}
+            onClick={() => {
+              handleNavSelector("chat");
+            }}
           >
             Chat
           </div>

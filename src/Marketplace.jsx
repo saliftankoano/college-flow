@@ -2,17 +2,20 @@ import { useState, useEffect } from "react";
 import { auth, db } from "./firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, getDocs } from "firebase/firestore";
-import { getDownloadURL, getStorage, ref, listAll } from "firebase/storage";
 import { S3Client, ListObjectsCommand } from "@aws-sdk/client-s3";
-
+import { useNavigate } from "react-router-dom";
+import BackNav from "./components/BackNav";
 export default function Marketplace() {
-  const storage = getStorage();
   const [displayName, setDisplayName] = useState();
   const [categoryFocus, setCategoryFocus] = useState("None");
   const [categoryData, setCategoryData] = useState([]);
+  const [nav, setNav] = useState("marketplace");
+  const navigate = useNavigate();
 
   const [artBg, setArtBg] = useState();
-
+  {
+    /* Categories */
+  }
   const [aiBg, setAiBg] = useState();
   const [webBg, setWebBg] = useState();
   const [marketingBg, setMarketingBg] = useState();
@@ -20,13 +23,19 @@ export default function Marketplace() {
   const [designBg, setDesignBg] = useState();
   const [edBg, setEdBg] = useState();
   const [bizBg, setBizBg] = useState();
+  {
+    /* Dark mode variables */
+  }
   const [theme, setTheme] = useState(localStorage.getItem("theme"));
   const [text, setText] = useState(localStorage.getItem("text"));
   const [projectIds, setProjectIds] = useState([]);
-  const [imgUrls, setImgUrls] = useState([]);
-  const [videoUrls, setVideoUrls] = useState([]);
-  const [docUrls, setDocUrls] = useState([]);
 
+  const [imgUrls, setImgUrls] = useState([]);
+
+  const date = new Date();
+  const day = date.getDate();
+  const month = date.getDay();
+  const year = date.getFullYear();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -98,9 +107,9 @@ export default function Marketplace() {
 
   function displayCategoryData() {
     return categoryData.map((item, index) => (
-      <div key={index} className="data-container text-black w-[20%] mx-4">
+      <div key={index} className="data-container text-black w-[32%] px-6">
         <img
-          className="w-[25vw] h-[28vh] rounded-md"
+          className="w-full h-[35vh] rounded-md"
           src={imgUrls[index]}
           key={index}
           alt="Project Image"
@@ -170,9 +179,23 @@ export default function Marketplace() {
     setBizBg("bg-[#E9E920]");
     setCategoryFocus("Business");
   }
-
+  const handleTheme = (theme) => {
+    setTheme(theme);
+  };
+  const handleNavSelector = async (navChosen) => {
+    setNav(navChosen);
+    if (navChosen == "account") {
+      navigate("/studentaccount");
+    } else if (navChosen == "marketplace") {
+      navigate("/marketplace");
+    } else {
+      navigate("/chat");
+    }
+  };
   return (
     <>
+      <BackNav themeSelector={handleTheme} navSelector={handleNavSelector} />
+
       <div className={`${theme} h-[100vh]`}>
         <div
           className={`text-2xl text-black font-monaswb w-2/4 font-semibold text-center mx-auto pt-8`}
@@ -236,7 +259,7 @@ export default function Marketplace() {
             {categoryFocus == "None" ? (
               <h1 className="text-4xl text-center">Please select a Category</h1>
             ) : (
-              <div className="data px-[2%] flex flex-wrap mt-4 w-[96%]">
+              <div className="data flex flex-wrap mt-7 w-[85%] justify-center mx-auto">
                 {displayCategoryData()}
               </div>
             )}
