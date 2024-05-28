@@ -45,7 +45,7 @@ export default function StudentAccount() {
             src={circle}
             alt="circle shape"
           />
-          <div className="z-10 info  flex w-[60%] mt-[-80%] pt-[5%] ml-[22%]">
+          <div className="z-10 info flex w-[60%] mt-[-80%] pt-[5%] ml-[22%]">
             <div className="top-card w-full mt-[-2%] px-[5%] bg-white border-[#0D1717] border-[1px] border-opacity-20 rounded-xl">
               <img
                 className="mx-auto pt-5"

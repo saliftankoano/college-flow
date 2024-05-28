@@ -8,7 +8,7 @@ import moon from "../assets/moon.svg";
 
 export default function BackNav({ themeSelector, navSelector }) {
   const [clientNav, setClientNav] = useState("marketplace");
-  const [theme, setTheme] = useState(" bg-white");
+  const [theme, setTheme] = useState("light");
   const [logo, setLogo] = useState("light");
   const [text, setText] = useState("text-[#0D1717]");
 
@@ -18,8 +18,6 @@ export default function BackNav({ themeSelector, navSelector }) {
   useEffect(() => {
     localStorage.setItem("clientNav", clientNav);
     localStorage.setItem("theme", theme);
-    localStorage.setItem("logo", logo);
-    localStorage.setItem("text", text);
   }, [clientNav, theme, logo, text]);
 
   useEffect(() => {}, [clientNav]);
@@ -27,7 +25,6 @@ export default function BackNav({ themeSelector, navSelector }) {
   // Handle theme selection
   function handleThemeSelector(themeChosen) {
     themeSelector(themeChosen);
-    onThemeChange(themeChosen); // Call the callback function with the new theme
   }
 
   // Handle navigation selection
@@ -38,23 +35,22 @@ export default function BackNav({ themeSelector, navSelector }) {
 
   // Toggle theme
   function handleTheme() {
-    setText(text === " text-[#0D1717]" ? " text-white" : " text-[#0D1717]");
-    setLogo(logo === "light" ? "dark" : "light");
-    setTheme(theme === " bg-white" ? " dark: bg-[#0D1717]" : " bg-white");
+    setTheme(theme === "light" ? "dark" : "light");
     handleThemeSelector(theme); // Pass the updated theme to the handler
-    localStorage.setItem("text", text);
-    localStorage.setItem("theme", theme);
-    localStorage.setItem("logo", logo);
   }
 
   return (
     <>
       <div
-        className={`inline-flex py-2 w-full border-[1px] border-t-0 border-[#004439] border-opacity-10 ${theme}`}
+        className={` ${
+          theme == "light"
+            ? "bg-bkg_light text-text_dark"
+            : "bg-bkg_dark text-text_light"
+        } inline-flex py-2 w-full border-[1px] border-t-0 border-[#004439] border-opacity-10`}
       >
         <div className="logo w-[10%] flex justify-center">
           <a href="/studentdash">
-            {logo === "light" ? (
+            {theme === "light" ? (
               <img src={cfc} alt="light logo" />
             ) : (
               <img src={cfy} alt="dark logo" />
@@ -62,7 +58,7 @@ export default function BackNav({ themeSelector, navSelector }) {
           </a>
         </div>
         <div
-          className={`ml-[5%] font-customs font-medium text-base inline-flex ${text} space-x-6 items-center`}
+          className={`ml-[5%] font-customs font-medium text-base inline-flex space-x-6 items-center`}
         >
           <div
             className={`account h-full content-center hover:cursor-pointer`}
@@ -93,7 +89,7 @@ export default function BackNav({ themeSelector, navSelector }) {
           className="toggle-btn flex items-center ml-[55%] hover:cursor-pointer"
           onClick={handleTheme}
         >
-          {theme === " bg-white" ? (
+          {theme === "light" ? (
             <img src={moon} alt="moon icon" />
           ) : (
             <img src={sun} alt="sun icon" />

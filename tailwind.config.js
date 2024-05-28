@@ -48,6 +48,10 @@ module.exports = {
         customs: ["mona"],
       },
       colors: {
+        text_light: "#ffffff",
+        bkg_light: "#ffffff",
+        text_dark: "#0D1717",
+        bkg_dark: "#0D1717",
         primary: {
           50: "#eff6ff",
           100: "#dbeafe",

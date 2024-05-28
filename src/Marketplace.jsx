@@ -5,7 +5,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { S3Client, ListObjectsCommand } from "@aws-sdk/client-s3";
 import { useNavigate } from "react-router-dom";
 import BackNav from "./components/BackNav";
-export default function Marketplace() {
+export default function Marketplace({ themeSelector, navSelector }) {
   const [displayName, setDisplayName] = useState();
   const [categoryFocus, setCategoryFocus] = useState("None");
   const [categoryData, setCategoryData] = useState([]);
@@ -26,8 +26,7 @@ export default function Marketplace() {
   {
     /* Dark mode variables */
   }
-  const [theme, setTheme] = useState(localStorage.getItem("theme"));
-  const [text, setText] = useState(localStorage.getItem("text"));
+  const [theme, setTheme] = useState();
   const [projectIds, setProjectIds] = useState([]);
 
   const [imgUrls, setImgUrls] = useState([]);
@@ -45,8 +44,9 @@ export default function Marketplace() {
         setDisplayName(name);
       }
     });
+    setTheme("light");
   }, []);
-
+  useEffect(() => {}, [theme]);
   useEffect(() => {
     async function fetchData() {
       if (categoryFocus !== "None") {
@@ -107,14 +107,25 @@ export default function Marketplace() {
 
   function displayCategoryData() {
     return categoryData.map((item, index) => (
-      <div key={index} className="data-container text-black w-[32%] px-6">
+      <div
+        key={index}
+        className={`data-container ${
+          theme == "light" ? "text-text_dark" : "text-text_light"
+        } w-[32%] px-6`}
+      >
         <img
           className="w-full h-[35vh] rounded-md"
           src={imgUrls[index]}
           key={index}
           alt="Project Image"
         />
-        <div className="project-info mt-3 bg-[#F6FBFA] px-4">
+        <div
+          className={`project-info mt-3 ${
+            theme == "light"
+              ? " text-text_dark"
+              : "bg-[#00392F] text-text_light"
+          } px-4`}
+        >
           <h2 className="text-sm flex justify-between font-bold mb-2">
             {item.title}
           </h2>
@@ -129,58 +140,58 @@ export default function Marketplace() {
     return null;
   }
   function setEverythingNormal() {
-    setAiBg("bg-white");
-    setArtBg("bg-white");
-    setBizBg("bg-white");
-    setDesignBg("bg-white");
-    setEdBg("bg-white");
-    setMarketingBg("bg-white");
-    setVideoBg("bg-white");
-    setWebBg("bg-white");
+    setAiBg(theme == "light" ? "" : "bg-bkg_dark");
+    setArtBg(theme == "light" ? "" : "bg-bkg_dark");
+    setBizBg(theme == "light" ? "" : "bg-bkg_dark");
+    setDesignBg(theme == "light" ? "" : "bg-bkg_dark");
+    setEdBg(theme == "light" ? "" : "bg-bkg_dark");
+    setMarketingBg(theme == "light" ? "" : "bg-bkg_dark");
+    setVideoBg(theme == "light" ? "" : "bg-bkg_dark");
+    setWebBg(theme == "light" ? "" : "bg-bkg_dark");
   }
 
   function handleAi() {
     setEverythingNormal();
-    setAiBg("bg-[#E9E920]");
+    setAiBg("bg-[#E9E920] text-text_dark");
     setCategoryFocus("AI");
   }
   function handleArt() {
     setEverythingNormal();
-    setArtBg("bg-[#E9E920]");
+    setArtBg("bg-[#E9E920] text-text_dark");
     setCategoryFocus("Art");
   }
   function handleWeb() {
     setEverythingNormal();
-    setWebBg("bg-[#E9E920]");
+    setWebBg("bg-[#E9E920] text-text_dark");
     setCategoryFocus("Web");
   }
   function handleMarketing() {
     setEverythingNormal();
-    setMarketingBg("bg-[#E9E920]");
+    setMarketingBg("bg-[#E9E920] text-text_dark");
     setCategoryFocus("Marketing");
   }
   function handleVideo() {
     setEverythingNormal();
-    setVideoBg("bg-[#E9E920]");
+    setVideoBg("bg-[#E9E920] text-text_dark");
     setCategoryFocus("Video");
   }
   function handleDesign() {
     setEverythingNormal();
-    setDesignBg("bg-[#E9E920]");
+    setDesignBg("bg-[#E9E920] text-text_dark");
     setCategoryFocus("Design");
   }
   function handleEducation() {
     setEverythingNormal();
-    setEdBg("bg-[#E9E920]");
+    setEdBg("bg-[#E9E920] text-text_dark");
     setCategoryFocus("Education");
   }
   function handleBusiness() {
     setEverythingNormal();
-    setBizBg("bg-[#E9E920]");
+    setBizBg("bg-[#E9E920] text-text_dark");
     setCategoryFocus("Business");
   }
   const handleTheme = (theme) => {
-    setTheme(theme);
+    setTheme(theme == "light" ? "dark" : "light");
   };
   const handleNavSelector = async (navChosen) => {
     setNav(navChosen);
@@ -196,59 +207,87 @@ export default function Marketplace() {
     <>
       <BackNav themeSelector={handleTheme} navSelector={handleNavSelector} />
 
-      <div className={`${theme} h-[100vh]`}>
+      <div
+        className={`${
+          theme == "light"
+            ? "bg-bkg_light text-text_dark"
+            : "bg-bkg_dark text-text_light"
+        } h-[100vh]`}
+      >
         <div
-          className={`text-2xl text-black font-monaswb w-2/4 font-semibold text-center mx-auto pt-8`}
+          className={`text-2xl font-monaswb w-2/4 font-semibold text-center mx-auto pt-8 ${
+            theme == "light" ? " text-text_dark" : "text-text_light"
+          }`}
         >
-          Explore a curated selection of interactive design projects, from
-          advanced web design to detailed illustrations
+          Explore a curated selection of fantastic projects, from AI to web
+          development
         </div>
-        <div className="menu-options w-full mt-4 inline-flex flex-wrap items-center justify-center text-[#004439] ">
+        <div
+          className={`menu-options w-full mt-4 inline-flex flex-wrap items-center justify-center ${
+            theme == "light" ? " text-text_dark" : "text-text_light"
+          }`}
+        >
           <div
             onClick={handleAi}
-            className={`hover: cursor-pointer ai py-1 px-4 h-[10%] mx-4 ${aiBg} border-[#004439] border-opacity-30 border-[1px] rounded-xl text-center`}
+            className={`hover: cursor-pointer ai py-1 px-4 h-[10%] mx-4 ${aiBg} ${
+              theme == "light" ? "border-[#004439]" : "border-[#ffffff]"
+            }  border-opacity-30 border-[1px] rounded-xl text-center`}
           >
             AI
           </div>
           <div
             onClick={handleWeb}
-            className={`hover: cursor-pointer web py-1 px-4 h-[10%] mx-4 ${webBg} border-[#004439] border-opacity-30 border-[1px] rounded-xl text-center`}
+            className={`hover: cursor-pointer web py-1 px-4 h-[10%] mx-4 ${webBg} ${
+              theme == "light" ? "border-[#004439]" : "border-[#ffffff]"
+            } border-opacity-30 border-[1px] rounded-xl text-center`}
           >
             Web Development
           </div>
           <div
             onClick={handleDesign}
-            className={`hover: cursor-pointer design py-1 px-4 h-[10%] mx-4 ${designBg} border-[#004439] border-opacity-30 border-[1px] rounded-xl text-center`}
+            className={`hover: cursor-pointer design py-1 px-4 h-[10%] mx-4 ${designBg} ${
+              theme == "light" ? "border-[#004439]" : "border-[#ffffff]"
+            } border-opacity-30 border-[1px] rounded-xl text-center`}
           >
             Design
           </div>
           <div
             onClick={handleMarketing}
-            className={`hover: cursor-pointer marketing py-1 px-4 h-[10%] mx-4 ${marketingBg} border-[#004439] border-opacity-30 border-[1px] rounded-xl text-center`}
+            className={`hover: cursor-pointer marketing py-1 px-4 h-[10%] mx-4 ${marketingBg} ${
+              theme == "light" ? "border-[#004439]" : "border-[#ffffff]"
+            } border-opacity-30 border-[1px] rounded-xl text-center`}
           >
             Digital Marketing
           </div>
           <div
             onClick={handleEducation}
-            className={`hover: cursor-pointer ed py-1 px-4 h-[10%] mx-4 ${edBg} border-[#004439] border-opacity-30 border-[1px] rounded-xl text-center`}
+            className={`hover: cursor-pointer ed py-1 px-4 h-[10%] mx-4 ${edBg} ${
+              theme == "light" ? "border-[#004439]" : "border-[#ffffff]"
+            } border-opacity-30 border-[1px] rounded-xl text-center`}
           >
             Education
           </div>
           <div
             onClick={handleVideo}
-            className={`hover: cursor-pointer vid py-1 px-4 h-[10%] mx-4 ${videoBg} border-[#004439] border-opacity-30 border-[1px] rounded-xl text-center`}
+            className={`hover: cursor-pointer vid py-1 px-4 h-[10%] mx-4 ${videoBg} ${
+              theme == "light" ? "border-[#004439]" : "border-[#ffffff]"
+            } border-opacity-30 border-[1px] rounded-xl text-center`}
           >
             Video
           </div>
           <div
             onClick={handleBusiness}
-            className={`hover: cursor-pointer biz py-1 px-4 h-[10%] mx-4 ${bizBg} border-[#004439] border-opacity-30 border-[1px] rounded-xl text-center`}
+            className={`hover: cursor-pointer biz py-1 px-4 h-[10%] mx-4 ${bizBg} ${
+              theme == "light" ? "border-[#004439]" : "border-[#ffffff]"
+            } border-opacity-30 border-[1px] rounded-xl text-center`}
           >
             Business
           </div>
           <div
             onClick={handleArt}
-            className={`hover: cursor-pointer art py-1 px-4 h-[10%] mx-4 ${artBg} border-[#004439] border-opacity-30 border-[1px] rounded-xl text-center`}
+            className={`hover: cursor-pointer art py-1 px-4 h-[10%] mx-4 ${artBg} ${
+              theme == "light" ? "border-[#004439]" : "border-[#ffffff]"
+            } border-opacity-30 border-[1px] rounded-xl text-center`}
           >
             Art
           </div>
