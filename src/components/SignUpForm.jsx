@@ -43,7 +43,7 @@ export default function SignUpForm(props) {
       const docRef = doc(db, `${newPath}/${auth.currentUser.uid}`);
       setDoc(docRef, {});
       // setDoc(docRef, )
-      Navigate(`/${path}`);
+      Navigate(`/marketplace`);
     } catch (error) {
       console.error("Error occurred during sign up:", error);
       // Handle specific errors and provide user feedback if needed

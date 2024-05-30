@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Avatar, Dropdown } from "flowbite-react";
+import { auth } from "../firebaseConfig";
+import { signOut } from "firebase/auth";
+
 import cfc from "../assets/cfc.svg";
 import cfy from "../assets/cfy.svg";
 import profile from "../assets/profile.svg";
@@ -13,7 +17,16 @@ export default function BackNav({ themeSelector, navSelector }) {
   const [text, setText] = useState("text-[#0D1717]");
 
   const Navigate = useNavigate();
-
+  function logOut() {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+    Navigate("/signin");
+  }
   // Save initial states in LocalStorage for persistent storage across pages
   useEffect(() => {
     localStorage.setItem("clientNav", clientNav);
@@ -49,7 +62,7 @@ export default function BackNav({ themeSelector, navSelector }) {
         } inline-flex py-2 w-full border-[1px] border-t-0 border-[#004439] border-opacity-10`}
       >
         <div className="logo w-[10%] flex justify-center">
-          <a href="/studentdash">
+          <a href="/marketplace">
             {theme === "light" ? (
               <img src={cfc} alt="light logo" />
             ) : (
@@ -96,7 +109,22 @@ export default function BackNav({ themeSelector, navSelector }) {
           )}
         </div>
         <div className="profile-pic flex items-center ml-[2.5%]">
-          <img src={profile} alt="profile" />
+          <Dropdown
+            label={
+              <Avatar alt="User settings" img={profile} rounded size="md" />
+            }
+            arrowIcon={false}
+            inline
+          >
+            <Dropdown.Header>
+              <span className="block text-sm">
+                {auth.currentUser.displayName}
+              </span>
+            </Dropdown.Header>
+            <Dropdown.Item>Update Profile</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item onClick={logOut}>Sign out</Dropdown.Item>
+          </Dropdown>
         </div>
       </div>
     </>

@@ -30,10 +30,8 @@ export default function SignIn() {
 
       const stuDoc = await getDoc(stuDocRef);
 
-      if (stuDoc.exists()) {
-        Navigate("/studentdash");
-      } else if (cliDocRef.exists()) {
-        Navigate("/clientdash");
+      if (stuDoc.exists() || cliDocRef.exists()) {
+        Navigate("/marketplace");
       } else {
         console.log(`User unfound !!!`);
       }

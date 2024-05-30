@@ -26,7 +26,7 @@ export default function Marketplace({ themeSelector, navSelector }) {
   {
     /* Dark mode variables */
   }
-  const [theme, setTheme] = useState();
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
   const [projectIds, setProjectIds] = useState([]);
 
   const [imgUrls, setImgUrls] = useState([]);
@@ -35,6 +35,7 @@ export default function Marketplace({ themeSelector, navSelector }) {
   const day = date.getDate();
   const month = date.getDay();
   const year = date.getFullYear();
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -50,6 +51,7 @@ export default function Marketplace({ themeSelector, navSelector }) {
   useEffect(() => {
     async function fetchData() {
       if (categoryFocus !== "None") {
+        console.log(categoryFocus);
         const categoryDocs = await getDocs(collection(db, categoryFocus));
         const data = categoryDocs.docs.map((project) => project.data());
         setCategoryData(data);
@@ -163,7 +165,7 @@ export default function Marketplace({ themeSelector, navSelector }) {
   function handleWeb() {
     setEverythingNormal();
     setWebBg("bg-[#E9E920] text-text_dark");
-    setCategoryFocus("Web");
+    setCategoryFocus("Web development");
   }
   function handleMarketing() {
     setEverythingNormal();
@@ -206,7 +208,6 @@ export default function Marketplace({ themeSelector, navSelector }) {
   return (
     <>
       <BackNav themeSelector={handleTheme} navSelector={handleNavSelector} />
-
       <div
         className={`${
           theme == "light"
