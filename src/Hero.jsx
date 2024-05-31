@@ -1,6 +1,11 @@
 import React from "react";
 import heroMan from "./assets/hero-man.png";
+import { useNavigate } from "react-router-dom";
 export default function Hero() {
+  const navigate = useNavigate();
+  function signUp() {
+    navigate("/signup");
+  }
   return (
     <>
       <section className="pt-[10%] bg-[#004439] w-full">
@@ -120,7 +125,7 @@ export default function Hero() {
               Tech, Marketing, Education, Math and Art .
             </p>
             <a
-              href="/signup"
+              onClick={signUp}
               className="ease-in transition-all inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-black rounded-2xl bg-[#E9E920] hover:bg-white hover:text-black focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
             >
               Get Started
