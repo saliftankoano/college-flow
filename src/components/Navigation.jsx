@@ -8,7 +8,7 @@ export default function Navigation() {
   }
 
   return (
-    <nav className="z-40 h-[10%] fixed w-[100%] bg-[#004439] text-white  border-gray-200">
+    <nav className="z-40 h-[10%] w-[100%] bg-[#004439] text-white  border-gray-200">
       <div className="bg-[#004439] h-[100%] max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           <svg

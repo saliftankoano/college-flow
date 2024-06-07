@@ -1,27 +1,15 @@
-import aiVideo from "../assets/videos/ai.mp4";
-import webVideo from "../assets/videos/web.mp4";
-import designVideo from "../assets/videos/design.mp4";
-import digitalVideo from "../assets/videos/digital.mp4";
-import edVideo from "../assets/videos/education.mp4";
-import consultVideo from "../assets/videos/consult.mp4";
-import artVideo from "../assets/videos/art.mp4";
-import viVideo from "../assets/videos/video.mp4";
-import vrVideo from "../assets/videos/vr.mp4";
-import bizVideo from "../assets/videos/biz.mp4";
-
 import { useState } from "react";
-
 const videos = [
-  aiVideo,
-  webVideo,
-  designVideo,
-  digitalVideo,
-  edVideo,
-  consultVideo,
-  artVideo,
-  viVideo,
-  vrVideo,
-  bizVideo,
+  "https://ik.imagekit.io/engineerbf24/college-flow/videos/ai.mp4?updatedAt=1717745077816",
+  "https://ik.imagekit.io/engineerbf24/college-flow/videos/web.mp4?updatedAt=1717745073975",
+  "https://ik.imagekit.io/engineerbf24/college-flow/videos/design.mp4?updatedAt=1717745072242",
+  "https://ik.imagekit.io/engineerbf24/college-flow/videos/digital.mp4?updatedAt=1717745080852",
+  "https://ik.imagekit.io/engineerbf24/college-flow/videos/education.mp4?updatedAt=1717745077257",
+  "https://ik.imagekit.io/engineerbf24/college-flow/videos/consult.mp4?updatedAt=1717745090878",
+  "https://ik.imagekit.io/engineerbf24/college-flow/videos/art.mp4?updatedAt=1717745072407",
+  "https://ik.imagekit.io/engineerbf24/college-flow/videos/video.mp4?updatedAt=1717745076025",
+  "https://ik.imagekit.io/engineerbf24/college-flow/videos/vr.mp4?updatedAt=1717745080897",
+  "https://ik.imagekit.io/engineerbf24/college-flow/videos/biz.mp4?updatedAt=1717745073908",
 ];
 const categoryNames = [
   "Artificial Intelligence",
@@ -64,8 +52,8 @@ export default function Carousel() {
 
   return (
     <>
-      <div className="wrapper relative w-[100%] bg-white ">
-        <div className="inline-flex h-[365px] justify-center items-center ">
+      <div className="wrapper relative w-[100%] bg-white mt-[-5%]">
+        <div className="inline-flex h-[365px] justify-center items-center ml-[3%] ">
           <div
             className="z-10 left-arrow relative left-[1.5%] flex items-center justify-center bg-white rounded-[50%] hover:cursor-pointer"
             onClick={moveLeft}
@@ -83,13 +71,13 @@ export default function Carousel() {
               />
             </svg>
           </div>
-          <div className="videos w-full flex transition transform duration-[6000] ease-in">
+          <div className="videos w-full flex justify-center transition transform duration-[6000] ease-in">
             {[0, 1, 2, 3, 4].map((offset) => {
               const videoIndex = getVideoIndex(pos + offset);
               const video = videos[videoIndex];
               return (
                 <div
-                  className=" rounded-[8px]  min-w-[252px] mr-[8px]"
+                  className=" rounded-[8px]  max-w-[252px] mr-[8px]"
                   key={videoIndex}
                 >
                   <div className="Upper-text text-white z-10 absolute mt-[2%] ps-[2%]">

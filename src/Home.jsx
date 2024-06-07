@@ -1,20 +1,16 @@
 import Navigation from "./components/Navigation";
-import Footer from "./components/Footer";
-import Popular from "./components/Popular";
-import Services from "./components/Services";
-import ValueProp from "./components/ValueProp";
-import Hero from "./Hero";
+import Hero from "./components/Hero";
 import Logos from "./components/Logos";
-import Best from "./components/Best";
+import Footer from "./components/Footer";
 export default function Home() {
   return (
-    <div className="w-[100%] bg-whie">
-      <Navigation />
-      <Hero />
-      <Popular />
-      <Logos />
-      <Best />
-      <Footer />
-    </div>
+    <>
+      <div className="h-full">
+        <Navigation />
+        <Hero />
+        <Logos />
+        <Footer />
+      </div>
+    </>
   );
 }

@@ -66,12 +66,12 @@ export default function Best() {
 
         {/* BEST Image */}
         <img
-          className="col-start-2 col-end-12 row-start-1 row-end-9 z-10 pt-[17%]"
+          className=" scale-[1.2] col-start-2 col-end-12 row-start-1 row-end-9 z-10 pt-[17%]"
           src={best}
         />
         {/* THE BEST TEXT */}
         <div className="col-start-1 col-end-1 z-10 w-[400%] h-[30%] pt-3 ml-[160%] mt-[-70%]">
-          <span className="text-white text-6xl">The Best Part?</span>
+          <span className="best-part text-white text-6xl">The Best Part?</span>
           <span className="text-[#E9E920] text-6xl">Everything.</span>
           <button className="bg-[#E9E920] mt-[6%] w-[35%] h-[50%] text-[#00392F] text-xl font-bold rounded-full ">
             Get Started

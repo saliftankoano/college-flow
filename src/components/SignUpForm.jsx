@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { auth, db } from "../firebaseConfig";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { getStorage, ref } from "firebase/storage";
+import { getStorage } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 
 export default function SignUpForm(props) {
@@ -38,7 +38,6 @@ export default function SignUpForm(props) {
       updateProfile(auth.currentUser, {
         displayName: fullName,
       });
-      const path = entity === "Client" ? "clientdash" : "studentdash";
       const newPath = entity == "Client" ? "clients" : "students";
       const docRef = doc(db, `${newPath}/${auth.currentUser.uid}`);
       setDoc(docRef, {});

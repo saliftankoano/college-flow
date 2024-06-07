@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="./src/assets/cfw.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>College flow</title>
+    <title>College Flow - Connect with Talented Student Freelancers</title>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <link href="./output.css" rel="stylesheet" />
     <!-- FONTS GOOGLE-->
@@ -14,22 +14,69 @@
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Eczar:wght@400..800&family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <!-- Open Graph Meta Tags -->
+    <meta
+      property="og:title"
+      content="College Flow - Connect with Talented Student Freelancers"
+    />
+    <meta
+      property="og:description"
+      content="College Flow connects college clients with talented student freelancers offering services in AI, web development, design, and more."
+    />
+    <meta
+      property="og:image"
+      content="https://ik.imagekit.io/engineerbf24/college-flow/cfw.svg?updatedAt=1717744737787"
+    />
+    <meta property="og:url" content="https://college-flow.onrender.com/" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="College Flow - Connect with Talented Student Freelancers"
+    />
+    <meta
+      name="twitter:description"
+      content="College Flow connects college clients with talented student freelancers offering services in AI, web development, design, and more."
+    />
+    <meta
+      name="twitter:image"
+      content="https://example.com/path/to/image.jpg"
+    />
+
     <meta
       name="google-signin-client_id"
       content="1031413628489-r18dqt1tqi9mm0v3lrvb0ctq0fr84bvh.apps.googleusercontent.com"
     />
     <meta
       name="description"
-      content="College Flow connects college clients with talented student freelancers offering services in AI, web development, design, and more. Get quality work done by skilled students."
+      content="Connect with talented student freelancers for AI, web development, and design services at College Flow. Quality work by skilled students."
     />
+
     <meta
       name="keywords"
       content="freelance services, college students, AI development, web development, graphic design, student freelancers, hire students, college freelance, student jobs, freelance work, college projects, technology services, design services, college flow"
     />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "College Flow",
+        "url": "https://collegeflow.com",
+        "logo": "https://collegeflow.com/path/to/logo.png",
+        "sameAs": [
+          "https://www.facebook.com/college__flow",
+          "https://www.twitter.com/college__flow",
+          "https://www.instagram.com/college__flow"
+        ],
+        "description": "College Flow connects college clients with talented student freelancers offering services in AI, web development, design, and more."
+      }
+    </script>
   </body>
 </html>
