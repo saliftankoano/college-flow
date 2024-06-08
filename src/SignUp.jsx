@@ -58,13 +58,13 @@ export default function SignUp() {
         {showOptions && (
           <div className="bg-white">
             <section className="signup w-full h-[70vh] font-customs bg-white">
-              <div className="title">
+              <div className="title flex">
                 {" "}
-                <h1 className="text-black text-3xl text-center font-semibold">
+                <h1 className="text-black text-xl text-center font-semibold sm:text-2xl">
                   Join as a client or student
                 </h1>
               </div>
-              <div className="w-[36%] mx-auto mt-10">
+              <div className="w-[70%] sm:w-[60%] sm:mx-auto md:w-[50%] lg:w-[36%] mx-auto mt-10">
                 <div className="inline-flex w-full">
                   {/* Client option */}
                   <div
@@ -97,7 +97,7 @@ export default function SignUp() {
                   </div>
                   {/* Student option */}
                   <div
-                    className={`student w-[48%] py-5 border-[${studentBorderColor}] border-[1px]`}
+                    className={`student w-[48%] pt-5 border-[${studentBorderColor}] border-[1px]`}
                     onClick={handleStudentOption}
                   >
                     <div className="ml-[85%]">
