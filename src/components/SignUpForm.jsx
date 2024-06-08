@@ -12,6 +12,9 @@ export default function SignUpForm(props) {
   const storage = getStorage();
   const Navigate = useNavigate(); // Initialize useNavigate hook
 
+  function handleSignIn() {
+    Navigate("/signin");
+  }
   const SignupSchema = Yup.object().shape({
     fullName: Yup.string()
       .min(2, "Too Short!")
@@ -142,12 +145,12 @@ export default function SignUpForm(props) {
                 </div>
                 <div className="already pb-10 text-center pt-3">
                   Already have an account?{" "}
-                  <a
+                  <div
                     className="underline hover:cursor-pointer hover:text-[#232db6]"
-                    href="/signin"
+                    onClick={handleSignIn}
                   >
                     Log In
-                  </a>
+                  </div>
                 </div>
               </Form>
             )}
