@@ -5,9 +5,10 @@ import SignUpForm from "./components/SignUpForm";
 import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
-  const navigate = useNavigate();
-  function signIn() {
-    navigate("/signin");
+  const Navigate = useNavigate();
+
+  function handleSignIn() {
+    Navigate("/signin");
   }
   const [showOptions, setShowOptions] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -141,7 +142,10 @@ export default function SignUp() {
                   </button>
                   <div className="text-black mt-2">
                     Already have an account{" "}
-                    <div onClick={signIn} className="text-[#004439] underline">
+                    <div
+                      onClick={handleSignIn}
+                      className="text-[#004439] underline"
+                    >
                       Log In
                     </div>
                   </div>
