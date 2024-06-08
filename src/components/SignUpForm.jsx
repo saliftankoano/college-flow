@@ -32,8 +32,6 @@ export default function SignUpForm(props) {
         email,
         password
       );
-      const user = userCredentials.user;
-      const id = auth.currentUser.uid;
 
       updateProfile(auth.currentUser, {
         displayName: fullName,

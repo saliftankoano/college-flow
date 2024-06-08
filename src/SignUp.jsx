@@ -2,8 +2,13 @@ import { useState } from "react";
 import SimpleNav from "./components/SimpleNav";
 import Footer from "./components/Footer";
 import SignUpForm from "./components/SignUpForm";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+  function signIn() {
+    navigate("/signin");
+  }
   const [showOptions, setShowOptions] = useState(true);
   const [showForm, setShowForm] = useState(false);
 
@@ -136,9 +141,9 @@ export default function SignUp() {
                   </button>
                   <div className="text-black mt-2">
                     Already have an account{" "}
-                    <a href="/signin" className="text-[#004439] underline">
+                    <div onClick={signIn} className="text-[#004439] underline">
                       Log In
-                    </a>
+                    </div>
                   </div>
                 </div>
               </div>
