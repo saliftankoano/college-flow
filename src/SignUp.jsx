@@ -60,7 +60,7 @@ export default function SignUp() {
             <section className="signup w-full h-[70vh] font-customs bg-white">
               <div className="title flex">
                 {" "}
-                <h1 className="text-black text-xl text-center font-semibold sm:text-2xl md:text-2xl lg:text-4xl">
+                <h1 className="flex text-black text-xl text-center font-semibold sm:text-2xl md:text-2xl lg:text-4xl lg:mx-auto">
                   Join as a client or student
                 </h1>
               </div>
