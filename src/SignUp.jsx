@@ -136,7 +136,7 @@ export default function SignUp() {
                   </button>
                   <div className="text-black mt-2">
                     Already have an account{" "}
-                    <a href="signin" className="text-[#004439] underline">
+                    <a href="/signin" className="text-[#004439] underline">
                       Log In
                     </a>
                   </div>
