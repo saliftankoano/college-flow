@@ -7,8 +7,18 @@ export default function Footer() {
       <footer className="footer bg-[#2C3835]">
         <div className="inside px-[3.8%] pt-[4%] w-full h-[34vh] inline-flex">
           <div className="w-[30.56%]">
-            <img src={logo} alt="college flow logo" className="w-[30%]" />
-            <img src={circle} alt="circle" className="w-[30%] z-0 ml-[-17%]" />
+            <img
+              fetchPriority="low"
+              src={logo}
+              alt="college flow logo"
+              className="w-[30%]"
+            />
+            <img
+              fetchPriority="low"
+              src={circle}
+              alt="circle"
+              className="w-[30%] z-0 ml-[-17%]"
+            />
           </div>
           <div className="line border-s-[1px] h-[150px] border-white opacity-20"></div>
           <div className="center w-[36%] block">
