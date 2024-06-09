@@ -67,7 +67,7 @@ export default function Hero() {
         <div className="right mt-6 inline-flex justify-center items-center sm:w-[90%] sm:mx-[5%] md:inline-flex md:w-[90%] md:mx-[5%] lg:inline-flex lg:w-[90%] lg:mx-[5%] xl:flex xl:justify-end xl:mt-[-35%]">
           <img
             width="800px"
-            height="490px"
+            height="509px"
             fetchPriority="high"
             src="https://ik.imagekit.io/engineerbf24/college-flow/hero-landing.png?updatedAt=1717742815178"
             srcSet="https://ik.imagekit.io/engineerbf24/tr:w-501,h-485/college-flow/hero-landing.png?updatedAt=1717742815178 400w, https://ik.imagekit.io/engineerbf24/tr:w-601,h-585/college-flow/hero-landing.png?updatedAt=1717742815178 800w, https://ik.imagekit.io/engineerbf24/college-flow/hero-landing.png?updatedAt=1717742815178 1200w"
