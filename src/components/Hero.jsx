@@ -68,7 +68,6 @@ export default function Hero() {
           <img
             width="800px"
             height="509px"
-            fetchPriority="high"
             src="https://ik.imagekit.io/engineerbf24/college-flow/hero-landing.png?updatedAt=1717742815178"
             srcSet="https://ik.imagekit.io/engineerbf24/tr:w-501,h-485/college-flow/hero-landing.png?updatedAt=1717742815178 400w, https://ik.imagekit.io/engineerbf24/tr:w-601,h-585/college-flow/hero-landing.png?updatedAt=1717742815178 800w, https://ik.imagekit.io/engineerbf24/college-flow/hero-landing.png?updatedAt=1717742815178 1200w"
             alt="black college student with a bright smile"

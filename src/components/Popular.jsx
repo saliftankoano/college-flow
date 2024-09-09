@@ -1,6 +1,5 @@
 import popCircle from "../assets/pop-circle.svg";
 import Carousel from "./Carousel";
-
 export default function Popular() {
   return (
     <>
